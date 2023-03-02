@@ -10,6 +10,7 @@ public class LoggerConfiguration
 {
     // readonly so only the constructor in LoggerConfiguration can access it
     public readonly RegionInfo LoggerLocation;
+    public readonly Uri ApiUrl;
     public readonly string UserId;
     public readonly int LoggerId;
 
@@ -20,6 +21,8 @@ public class LoggerConfiguration
             .AddJsonFile("appsettings.json");
 
         var configuration = builder.Build();
+
+        ApiUrl = new Uri(configuration["speedTestApiUrl"]);
 
         var countryCode = configuration["loggerLocationCountryCode"];
         LoggerLocation = new RegionInfo(countryCode);
